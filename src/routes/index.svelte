@@ -1,59 +1,32 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
-	import Counter from '$lib/Counter.svelte';
+	import Control from '$lib/Control.svelte';
+	import Message from '$lib/Message.svelte';
+	import { waveCount, waves } from '$lib/stores';
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>waves</title>
 </svelte:head>
 
 <section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
+	<div class="mainContainer">
+		<div class="dataContainer">
+			<div class="header">welcome to waves</div>
+			<div class="bio">
+				waves are ephemeral messages - a maximum of 10 waves can exist at one time
+			</div>
+			<div class="bio">
+				if you send me a wave, there's a chance you could win some (fake) ether!
+			</div>
+			<div class="bio">connect your ethereum wallet and send me a wave!</div>
+
+			<div class="bio">total waves: {$waveCount}</div>
+
+			<Control />
+
+			{#each $waves as message}
+				<Message data={message} />
+			{/each}
 		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
+	</div>
 </section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
