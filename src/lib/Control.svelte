@@ -193,15 +193,15 @@
 		</button>
 	{:else if loading}
 		<button class="msgButton" on:click={changeNetwork}>
-			<span role="img" aria-label="do not enter sign"> ⛔ </span>{' '}
-			todo: create loader{' '}
-			<span role="img" aria-label="do not enter sign"> ⛔ </span>
+			<span role="img" aria-label="do not enter sign"> ⌛ </span>{' '}
+			waiting for txn...{' '}
+			<span role="img" aria-label="do not enter sign"> ⌛ </span>
 		</button>
 	{:else if failed}
 		<button class="clickButton" on:click={() => console.log("working on it")}>
-			<span role="img" aria-label="do not enter sign"> ⛔ </span>{' '}
+			<span role="img" aria-label="do not enter sign"> ⚠️ </span>{' '}
 			transaction failed - click to reset{' '}
-			<span role="img" aria-label="do not enter sign"> ⛔ </span>
+			<span role="img" aria-label="do not enter sign"> ⚠️ </span>
 		</button>
 	{:else}
 		<form on:submit|preventDefault={submit}>
