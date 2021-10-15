@@ -38,6 +38,8 @@
 		} catch (error) {
 			console.log(error);
 		}
+
+		await initNetwork();
 	}
 
 	async function changeNetwork() {
@@ -55,6 +57,7 @@
 		} catch (error) {
 			console.log(error);
 		}
+		await initNetwork();
 	}
 
 	async function submit(e) {
@@ -91,27 +94,10 @@
         console.log("Mined -- ", waveTxn.hash);
 	}
 
-	onMount(async () => {
+	async function initNetwork() {
 		if (!window.ethereum) {
 			return;
 		}
-
-		ethereum = window.ethereum;
-
-		$walletEnabled = true;
-
-		const accountSet = await setAccount(ethereum);
-		if (!accountSet) {
-			return;
-		}
-		
-		ethereum.on("chainChanged", (e) => {
-			if (e === '0x4') {
-				$networkReady = true;
-			} else {
-				$networkReady = false;
-			}
-      	});
 
 		if (ethereum.networkVersion !== '4') {
 			return;
@@ -119,8 +105,7 @@
 
 		$networkReady = true;
 
-
-		const provider = new ethers.providers.Web3Provider(ethereum);
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
       	const signer = provider.getSigner();
       	contract = new ethers.Contract(contractAddress, contractABI, signer);
 
@@ -154,7 +139,34 @@
             },
             ...arr.slice(0, 9),
           ]);
+
+		  waveCount.update(n => n+1);
         });
+	}
+
+	onMount(async () => {
+		if (!window.ethereum) {
+			return;
+		}
+
+		ethereum = window.ethereum;
+
+		$walletEnabled = true;
+
+		const accountSet = await setAccount(ethereum);
+		if (!accountSet) {
+			return;
+		}
+		
+		ethereum.on("chainChanged", (e) => {
+			if (e === '0x4') {
+				$networkReady = true;
+			} else {
+				$networkReady = false;
+			}
+      	});
+
+		await initNetwork();
 	});
 </script>
 
