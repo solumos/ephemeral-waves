@@ -200,7 +200,7 @@
 	{:else if failed}
 		<button class="clickButton" on:click={() => console.log("working on it")}>
 			<span role="img" aria-label="do not enter sign"> ⚠️ </span>{' '}
-			transaction failed - click to reset{' '}
+			transaction failed - wait 15 minutes!{' '}
 			<span role="img" aria-label="do not enter sign"> ⚠️ </span>
 		</button>
 	{:else}
