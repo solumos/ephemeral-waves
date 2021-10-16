@@ -161,6 +161,7 @@
 		ethereum.on("chainChanged", (e) => {
 			if (e === '0x4') {
 				$networkReady = true;
+				initNetwork();
 			} else {
 				$networkReady = false;
 			}
