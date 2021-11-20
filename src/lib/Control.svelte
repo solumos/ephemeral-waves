@@ -124,20 +124,20 @@
 		$waves = wavesCleaned;
 		$waveCount = totalWaves.toNumber();
 
-		contract.on('NewWave', (from, timestamp, message) => {
-			console.log('NewWave', from, timestamp, message);
+		// contract.on('NewWave', (from, timestamp, message) => {
+		// 	console.log('NewWave', from, timestamp, message);
 
-			waves.update((arr) => [
-				{
-					address: from,
-					timestamp: new Date(timestamp * 1000),
-					message: message
-				},
-				...arr.slice(0, 9)
-			]);
+		// 	waves.update((arr) => [
+		// 		{
+		// 			address: from,
+		// 			timestamp: new Date(timestamp * 1000),
+		// 			message: message
+		// 		},
+		// 		...arr.slice(0, 9)
+		// 	]);
 
-			waveCount.update((n) => n + 1);
-		});
+		// 	waveCount.update((n) => n + 1);
+		// });
 	}
 
 	onMount(async () => {
